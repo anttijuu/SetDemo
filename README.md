@@ -22,7 +22,7 @@ Tietojoukot (`Set`) ovat ohjemoinnissa äärellisiä tietoalkiokokoelmia (*conta
 - tietoelementit (alkiot) eivät ole joukossa missään tietyssä järjestyksessä ja
 - tietoelementti voi esiintyä tietojoukossa vain kerran
 
-Matematiikassa (joukko-oppi on matematiikan osa-alue) tietojoukot voivat olla äärettömiä, esimerkiksi kaikkien positiivisten kokonaislukujen joukko. Tietokoneissa lukuarvoilla on kuitenkin äärelliset arvot, riippuen käytetyistä tietotyypeistä ja tietokoneen prosessorin arkkitehtuurista. Tietojoukot eivät voi olla äärettömiä siksikään että tietokoneiden muisti on rajallista.
+Matematiikassa (joukko-oppi on matematiikan osa-alue; tosin tästä on olemassa eriäviä mielipiteitä) tietojoukot voivat olla äärettömiä, esimerkiksi kaikkien positiivisten kokonaislukujen joukko. Tietokoneissa lukuarvoilla on kuitenkin äärelliset arvot, riippuen käytetyistä tietotyypeistä ja tietokoneen prosessorin arkkitehtuurista. Tietojoukot eivät voi olla äärettömiä siksikään että tietokoneiden muisti on rajallista.
 
 
 ## Perusteet 

@@ -8,7 +8,7 @@ Tässä demossa käsitellään tietojoukko -tietorakenteita (`Set`). Peruskouluj
 
 Koska näitä taustatietoja joukko-opista ei enää opiskelijoilla tyypillisesti ole, siksi tämä perusoppimateriaali ja demo aiheesta. Joukko-opin perusteiden hallinta todennäköisesti auttaa ymmärtämään paitsi ehto- ja toistorakenteiden loogisia ehtoja, myös ymmärtämään tietojoukkoja, niiden toimintaa ja toteutusta. 
 
-Joukko oppi on olennainen osa tietojenkäsittelyä, englanninkielisestä [wikipedia-artikkelista](https://en.wikipedia.org/wiki/Set_theory), koska sekä boolen algebra että logiikka liittyvät joukko-oppiin:
+Joukko oppi on olennainen osa tietojenkäsittelyä. Esimerkiksi  englanninkielisessä [wikipedia-artikkelissa](https://en.wikipedia.org/wiki/Set_theory), todetaan:
 
 > Set theory is used to introduce students to logical operators (NOT, AND, OR), and semantic or rule description [...] of sets (e.g. "months starting with the letter A"), which may be useful when learning computer programming, since Boolean logic is used in various programming languages. Likewise, sets and other collection-like objects, such as multisets and lists, are common datatypes in computer science and programming.
 
@@ -23,8 +23,6 @@ Tietojoukot (`Set`) ovat ohjemoinnissa äärellisiä tietoalkiokokoelmia (*conta
 - tietoelementti voi esiintyä tietojoukossa vain kerran
 
 Matematiikassa (joukko-oppi on matematiikan osa-alue) tietojoukot voivat olla äärettömiä, esimerkiksi kaikkien positiivisten kokonaislukujen joukko. Tietokoneissa lukuarvoilla on kuitenkin äärelliset arvot, riippuen käytetyistä tietotyypeistä ja tietokoneen prosessorin arkkitehtuurista. Tietojoukot eivät voi olla äärettömiä siksikään että tietokoneiden muisti on rajallista.
-
-Tässä demossa rajaudutaan siis ohjelmoinnin kannalta olennaisiin perusteisiin tietojoukoista.
 
 
 ## Perusteet 
@@ -99,7 +97,7 @@ Summa summarum: joukko-opin perusteiden tunteminen auttaa usein rakentamaan ehto
 
 ## Mitä tietojoukoilla voi tehdä?
 
-Yksinkertaisimmillaan tietojoukko eli `Set` -rakenteita voi hyödyntää siihen, että pidetään sen avulla yllä kokoelmaa tietoelementtejä, varmistuen siitä että joukossa ei varmasti ole kahta kertaa samaa oliota (miten "samuus" määritellään, siitä alempana). Joukkoon vain lisätään elementtejä, ja sitten niitä sieltä voidaan hakea ja käyttää, mihin sovellus niitä tarvitseekaan.
+Yksinkertaisimmillaan tietojoukkoa eli `Set` -tietorakennetta voi hyödyntää siihen, että pidetään sen avulla yllä kokoelmaa tietoelementtejä, varmistuen siitä että joukossa ei varmasti ole kahta kertaa samaa oliota (miten "samuus" eli yhtäsuuruus määritellään, siitä alempana). Joukkoon vain lisätään elementtejä, ja sitten niitä sieltä voidaan hakea ja käyttää, mihin sovellus niitä tarvitseekaan.
 
 Jos tähän käytettäisiin tavallisia taulukoita (*array*), meidän pitäisi itse toteuttaa taulukkoa käsittelevä koodi joka varmistaa ettei elementti ole jo taulukossa, ja lisätä se sinne vasta jos se elementti ei ole jo taulukossa. Set -tietorakenteet tekevät tämän "automaattisesti". Alempana katsotaan miten tämä toteutetaan, sillä jokun toteuttamaa koodiahan tämäkin vaatii.
 
@@ -125,20 +123,22 @@ Operaatioita ovat siis seuraavat:
 * **leikkaus** (*intersection*) -- kahden joukon leikkaus sisältää *molemmissa* joukoissa olevat, yhteiset elementit. Esimerkiksi joukkojen {1, 2, 3} ja {2, 3, 4} leikkaus on joukko {2, 3}.
 * **symmetrinen erotus** (*symmetric difference*) -- kahden joukon ne elementit, jotka *eivät ole* molemmissa joukoissa (eli ovat vain jommassa kummassa joukossa). Esimerkiksi, joukkojen {1, 2, 3} ja {2, 3, 4} symmetrinen erotus on joukko {1, 4}.
 * **unioni** (*union*) -- kahden joukon elementit yhdistettynä. Jos molemmissa joukoissa oli samoja elementtejä, ne esiintyvät unionissa vain kerran. Esimerkiksi joukkojen {1, 2, 3} ja {2, 3, 4} unioni on joukko {1, 2, 3, 4}.
-* **joukkoerotus** (*set difference*, kuvassa *substracted*) -- Joukon A ne elementit, jotka eivät ole joukossa B. Esimerkiksi joukkojen {1, 2, 3} ja {2, 3, 4} joukkoerotus on joukko {1}.
+* **joukkoerotus** (*set difference*, kuvassa *substracting*) -- Joukon A ne elementit, jotka eivät ole joukossa B. Esimerkiksi joukkojen {1, 2, 3} ja {2, 3, 4} joukkoerotus on joukko {1}.
+
+> Englanninkielinen sana *substract* tarkoittaa vähentämistä, eli erotusta.
 
 Lisäksi `Set` toteuttaa usein metodeja joilla voidaan kysyä kahden joukon välisiä suhteita:
 
 * **osajoukko** `isSubset` -- testataan onko tietojoukko A osajoukko tietojoukosta B. Esimerkiksi, joukko {1, 2, 3} on osajoukko joukosta {0, 1, 2, 3, 4}. Jokainen joukko on siis myös itsensä osajoukko.
 * **aito osajoukko** (*proper subset, strict subset*) on sellainen, jossa on osa toisen joukon elementeistä, muttei kaikkia (joukot eivät siis ole yhtäsuuria).
-* **yläjoukko** (*termi?*, *superset*) `isSuperset` -- osajoukon "käänteinen" versio, testataan, onko tietojoukko A sellainen että se sisältää kaikki tietojoukon B elementit. Esimerkkinä, joukko {5, 6, 7, 8} on yläjoukko joukolle {6, 8}.
-* **aito yläjoukko** (*termi?*, *proper superset, strict superset*) `isStrictSuperset` kuten yläjoukko, mutta niin että joukot eivät ole yhtäsuuria.
+* **yläjoukko** (*superset*) `isSuperset` -- osajoukon "käänteinen" versio, testataan, onko tietojoukko A sellainen että se sisältää kaikki tietojoukon B elementit. Esimerkkinä, joukko {5, 6, 7, 8} on yläjoukko joukolle {6, 8}.
+* **aito yläjoukko** (*proper superset, strict superset*) `isStrictSuperset` kuten yläjoukko, mutta niin että joukot eivät ole yhtäsuuria.
 * **erillisyys** (*disjoint*) `isDisjoint` -- testataan, ovatko joukot erilliset, siten että joukoissa ei ole yhtään yhteistä elementtiä.
 
-Tässä perusteet. Tästä eteenpäin käsitellään sitä miten `Set` -tietorakenteiden toteutus etenee. Tämä osuus edellyttää Tietorakenteet ja algoritmit -kurssin hajautustaulu -tietorakenteen tuntemista.
+Tässä joukko-opin teoreettiset perusteet ohjelmoinnin näkökulmasta. Tästä eteenpäin käsitellään sitä miten `Set` -tietorakenteiden toteutus etenee. Tämä osuus edellyttää Tietorakenteet ja algoritmit -kurssin hajautustaulu -tietorakenteen tuntemista.
 
 
-## Toteutuksen perusteita
+## Set:n toteutuksen perusteista
 
 Javan `Set` -rajapinnan [dokumentaatio](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html) kertoo mitä Javan `Set` -tietorakenteilla voidaan tehdä.
 
@@ -146,7 +146,7 @@ Javan toteutus on kuitenkin aika suppea, eikä toteuta läheskään kaikkia yll�
 
 `Set`:t ovat usein erittäin nopeita tietorakenteita. Niitä **ei** siis ole toteutettu yllä kuvatulla tavalla taulukoilla, siten että uutta elementtiä lisätessä käydään aina **koko** taulukko läpi ja katsotaan onko elementti jo taulukossa. Tämä olisi erittäin hidas tapa, kun tietoaineistojen koko kasvaa suureksi.
 
-Taulukot ovat kuitenkin usein toteutuksessa käytetty tietorakenne. Toteutukset hyödyntävätkin **hajautusavaimia** eli tiivisteitä (*hash*), eli ovat samankaltaisia toteutukseltaan, kuin **hajautustaulut** (*hash table*). Tässä oletetaan että tunnet jo hajautustaulun perusteet, esim. sen miten törmäykset (*collisions*) hoidetaan esimerkiksi luotaamalla (*probing*).
+Taulukot ovat kuitenkin usein `Set`:ien toteutuksessa käytetty tietorakenne. Toteutukset hyödyntävätkin **hajautusavaimia** eli tiivisteitä (*hash*), eli ovat samankaltaisia toteutukseltaan, kuin **hajautustaulut** (*hash table*). Tässä oletetaan että tunnet jo hajautustaulun perusteet, esim. sen miten törmäykset (*collisions*) hoidetaan esimerkiksi luotaamalla (*probing*).
 
 > Toinen mahdollisuus on toteuttaa `Set` hyödyntäen puutietorakenteita (*tree*), esim. Javan `TreeSet`.
 
@@ -170,7 +170,14 @@ Miten `Set` sitten esimerkiksi elementtiä lisätessä tietää onko joukossa jo
 5. Jos elementti oli sama, sitä ei lisätä uudestaan, usein palautetaan arvo joka kertoo kutsujalle ettei lisäystä tehty.
 6. Jos taas askeleen 4 elementti oli joku muu elementti joka vain sattui tulemaan samaan indeksiin kuin lisättäväkin olisi mennyt, hoidetaan tämä törmäys (*collision*) esimerkiksi luotaamalla (*probing*), siten että *eri* elementti, joka sattui saamaan toisen eri elementin indeksin, voidaan lisätä jonnekin toiseen indeksiin.
 
-Samaa periaatetta käytetään myös tutkiessa onko joku tietty elementti `Set`:ssä. Elementtien läpikäynti tietojoukossa toteutetaan taas usein *iteraattoreiden* avulla.
+Samaa periaatetta käytetään myös tutkiessa onko joku tietty elementti `Set`:ssä. Elementtien läpikäynti tietojoukossa toteutetaan taas usein *iteraattoreiden* avulla. Iteraattorit mahdollistavat tietojoukon elementtien läpikäynnin tyypillisen näköisessä `for` -silmukassa:
+
+```Java
+   for (Integer value : theSet) {
+     print("Value is: " + value);
+	}
+```
+Iteraattoreista ei tässä kuitenkaan enempää.
 
 Kuten hajautustauluissakin, niin myös `Set`:n hyödyntämisessä on olennaista, että tietoelementtiin toteutettu hajautusfunktio on hyvä. Huono hajautusfunktio tuottaa eri elementeille samoja tiivisteitä, jolloin törmäyksiä syntyy paljon, ja `Set`:n toiminta hidastuu, jos aineiston koko kasvaa suureksi.
 

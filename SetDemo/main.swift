@@ -14,7 +14,7 @@ let setOfStrings1 = Set<String>(arrayLiteral: "Omena", "Päärynä", "Banaani")
 let setOfStrings2 = Set<String>(arrayLiteral: "Päärynä", "Banaani", "Omena")
 let emptySet: Set<Int> = Set()
 
-print("-- Basics, isEmpty and count:")
+print("\n-- Basics, isEmpty and count:")
 print("  This set \(setOfStrings1) has \(setOfStrings1.count) elements")
 var emptyOrNot = setOfStrings1.isEmpty ? "yes" : "no"
 print("  Is this set \(setOfStrings1) empty: \(emptyOrNot)")
@@ -22,36 +22,40 @@ print("  This set \(emptySet) has \(emptySet.count) elements")
 emptyOrNot = emptySet.isEmpty ? "yes" : "no"
 print("  Is this set \(emptySet) empty: \(emptyOrNot)")
 
-print("-- How equals works with sets?")
+print("\n-- How equals works with sets?")
 print("-- Are these sets equal or not")
-if (setOfStrings1 == setOfStrings2) { // Java: do setOfStrings1.equals(setOfStrings2) !!
+if (setOfStrings1 == setOfStrings2) {
 	print("\(setOfStrings1) is equal to \(setOfStrings2)")
 } else {
 	print("\(setOfStrings1) is NOT equal to \(setOfStrings2)")
 }
+// In Java, the if above must be implemented using equals:
+// if (setOfStrings1.equals(setOfStrings2)) { ...
 
 // Contains
-print("-- See how contains works with set \(setOfStrings1):")
+print("\n-- See how contains works with set \(setOfStrings1):")
 contains(set: setOfStrings1, value: "Mandariini")
 contains(set: setOfStrings1, value: "Omena")
 
-print("-- How to make sure we have an unique set of elements from duplicate values?")
+print("\n-- How to make sure we have an unique set of elements from duplicate values?")
+print("   Start from an array with duplicate elements...:")
 let array: Array<Int> = Array(arrayLiteral: 1, 1, 2, 3, 3, 3, 4, 5, 5)
 print("Array: \(array)")
+print("   Then put the elements to set and see duplicates not there:")
 let uniques: Set<Int> = Set(array)
 print("Set: \(uniques)")
 
-print("---Next: numbers in set, set operations -----------------------")
+print("\n---Next: numbers in set, set operations -----------------------")
 
 var setOfSmallInts: Set<Int> = Set(arrayLiteral: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
-var setOfOdds: Set<Int> = Set(arrayLiteral: 1, 3, 5, 7, 9, 11)
+var setOfOdds: Set<Int> = Set(arrayLiteral: 11, 3, 5, 7, 9, 1)
 var setOfEvens: Set<Int> = Set(arrayLiteral: 2, 4, 6, 8, 10)
 
 print("Set of small numbers: \(setOfSmallInts)")
 print("Set of odds         : \(setOfOdds)")
 print("Set of evens        : \(setOfEvens)")
 
-print("-- Is set of odds subset of set of evens?:")
+print("\n-- Is set of odds subset of set of evens?:")
 isSubset(set1: setOfOdds, of: setOfEvens)
 print("-- Is set of odds subset of set of small ints?:")
 isSubset(set1: setOfOdds, of: setOfSmallInts)
@@ -76,17 +80,25 @@ print("\(setOfOdds.intersection(setOfEvens))")
 print("-- Intersection of small ints and evens:")
 print("\(setOfSmallInts.intersection(setOfEvens))")
 
-print("-- Adding an already existing element to set, first current content...:")
+print("\n-- Adding an already existing element to set, first current content...:")
 print("\(setOfEvens)")
-let success = setOfEvens.insert(2).inserted ? "  Did the insert" : "  Did not do the insert"
+var success = setOfEvens.insert(2).inserted ? "  Did the insert" : "  Did not do the insert"
 print(success)
 print("-- ...and contents after inserting:")
 print("\(setOfEvens)")
 
-let antti = Citizen(personID: "112233-123N", name: "Antti")
-let tiina = Citizen(personID: "112233-123N", name: "Tiina")
+print("\n-- Adding a new element to set, first current content...:")
+print("\(setOfEvens)")
+success = setOfEvens.insert(12).inserted ? "  Did the insert" : "  Did not do the insert"
+print(success)
+print("-- ...and contents after inserting:")
+print("\(setOfEvens)")
 
-print("----- Set with our own data type (struct, Java would use class) -----")
+// Try giving citizens same id when Equatable has not been implemented...
+let antti = Citizen(personID: "112233-123N", name: "Antti")
+let tiina = Citizen(personID: "221133-123N", name: "Tiina")
+
+print("\n----- Set with our own data type (struct, Java would use class) -----")
 //print("Demonstrating Set with our own element type, Citizen:")
 //var citizens = Set<Citizen>()
 //citizens.insert(antti)
@@ -99,11 +111,11 @@ print("----- Set with our own data type (struct, Java would use class) -----")
 //}
 
 // Empty sets
-print("-- How about empty sets on left side")
+print("\n-- How about empty sets on left side")
 isSubset(set1: emptySet, of: setOfSmallInts)
 isSuperSet(set1: emptySet, of: setOfSmallInts)
 areSetsDisjoint(set1: emptySet, set2: setOfSmallInts)
-print("-- How about empty sets on right side")
+print("\n-- How about empty sets on right side")
 isSubset(set1: setOfSmallInts, of: emptySet)
 isSuperSet(set1: setOfSmallInts, of: emptySet)
 areSetsDisjoint(set1: setOfSmallInts, set2: emptySet)

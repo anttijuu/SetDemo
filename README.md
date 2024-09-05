@@ -61,7 +61,7 @@ Esimerkkinä asiakasohjelma (client) joka tekee webbipalvelimelle (server) pyynn
 ```Java
    int returnCode = httpClient.executeRequest(request);
 ```
-"
+
 Tässä `httpClient` on olio-ohjelmoinnin olio (`object`) joka lähettää palvelupyynnön kutsumalla metodia (funktiota) (`executeRequest`) palvelimelle HTTP-protokollaa käyttäen. Kun palvelin vastaa, metodi palauttaa kokonaisluvun joka kertoo miten pyynnön suorittamisen kanssa kävi. Kokonaisluku tulee palvelimelta asiakasohjelmalle joka tallentaa koodin `returnCode` -muuttujaan.
 
 HTTP [määrittelee](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) pyynnöille numeerisen kokonaislukukoodin, joka kertoo onnistuiko pyyntö vai ei, esimerkiksi:
@@ -203,7 +203,9 @@ Demon lähdekoodi löytyy alihakemistosta `SetDemo`. Huomaa että osa koodista d
 # Kuka tämän teki?
 
 (c) Antti Juustila, 2024
-INTERACT -tutkimusyksikkö, Tietojenkäsittelytieteiden koulutusohjelma, Oulun yliopisto.
+* INTERACT -tutkimusyksikkö,
+* Tietojenkäsittelytieteiden koulutusohjelma
+* Oulun yliopisto
 
 
 Käytetyt lähteet:

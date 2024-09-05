@@ -59,9 +59,9 @@ Ohjelmoinnissa tietojoukot ovat hyödyllinen käsite, sillä joukko-oppi -ajatte
 Esimerkkinä asiakasohjelma (client) joka tekee webbipalvelimelle (server) pyynnön jonkun tiedon hakemiseksi HTTP -protokollalla:
 
 ```Java
-    int returnCode = httpClient.executeRequest(request);
+   int returnCode = httpClient.executeRequest(request);
 ```
-
+"
 Tässä `httpClient` on olio-ohjelmoinnin olio (`object`) joka lähettää palvelupyynnön kutsumalla metodia (funktiota) (`executeRequest`) palvelimelle HTTP-protokollaa käyttäen. Kun palvelin vastaa, metodi palauttaa kokonaisluvun joka kertoo miten pyynnön suorittamisen kanssa kävi. Kokonaisluku tulee palvelimelta asiakasohjelmalle joka tallentaa koodin `returnCode` -muuttujaan.
 
 HTTP [määrittelee](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) pyynnöille numeerisen kokonaislukukoodin, joka kertoo onnistuiko pyyntö vai ei, esimerkiksi:
@@ -174,8 +174,8 @@ Samaa periaatetta käytetään myös tutkiessa onko joku tietty elementti `Set`:
 
 ```Java
    for (Integer value : theSet) {
-     print("Value is: " + value);
-	}
+      print("Value is: " + value);
+   }
 ```
 Iteraattoreista ei tässä kuitenkaan enempää.
 

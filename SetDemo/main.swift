@@ -35,6 +35,12 @@ print("-- See how contains works with set \(setOfStrings1):")
 contains(set: setOfStrings1, value: "Mandariini")
 contains(set: setOfStrings1, value: "Omena")
 
+print("-- How to make sure we have an unique set of elements from duplicate values?")
+let array: Array<Int> = Array(arrayLiteral: 1, 1, 2, 3, 3, 3, 4, 5, 5)
+print("Array: \(array)")
+let uniques: Set<Int> = Set(array)
+print("Set: \(uniques)")
+
 print("---Next: numbers in set, set operations -----------------------")
 
 var setOfSmallInts: Set<Int> = Set(arrayLiteral: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)

@@ -8,6 +8,10 @@ Tässä demossa käsitellään tietojoukko -tietorakenteita (`Set`). Peruskouluj
 
 Koska näitä taustatietoja joukko-opista ei enää opiskelijoilla tyypillisesti ole, siksi tämä perusoppimateriaali ja demo aiheesta. Joukko-opin perusteiden hallinta todennäköisesti auttaa ymmärtämään paitsi ehto- ja toistorakenteiden loogisia ehtoja, myös ymmärtämään tietojoukkoja, niiden toimintaa ja toteutusta. 
 
+Joukko oppi on olennainen osa tietojenkäsittelyä, englanninkielisestä [wikipedia-artikkelista](https://en.wikipedia.org/wiki/Set_theory), koska sekä boolen algebra että logiikka liittyvät joukko-oppiin:
+
+> Set theory is used to introduce students to logical operators (NOT, AND, OR), and semantic or rule description [...] of sets (e.g. "months starting with the letter A"), which may be useful when learning computer programming, since Boolean logic is used in various programming languages. Likewise, sets and other collection-like objects, such as multisets and lists, are common datatypes in computer science and programming.
+
 Materiaali on aika lyhyt, ja sisältää vain ohjelmoinnin kannalta olennaiset perusteet joukko-opista, ohjelmoinnin näkökulmasta. Lisätietoja saat lopussa listatuista lähteistä ja kirjallisuudesta.
  
 
@@ -177,7 +181,7 @@ Tehokkuus saadaan siis aikaan yhteispelillä -- `Set`:n toteuttaja tekee hyvän 
 
 Opettajan esittämässä demossa käydään läpi näitä joukkojen operaatioita, siten kun ne on valmiiksi toteutettuna Swiftin `Set` -tietorakenteessa.
 
-Demon lähdekoodi löytyy alihakemistosta `SetDemo`.
+Demon lähdekoodi löytyy alihakemistosta `SetDemo`. Huomaa että osa koodista demossa on kommentoituna, tarkoitus on että opettaja demossaan poistaa kommentit askel askeleelta ja kertoo mitä tapahtuu ja miksi.
 
 
 # Lähteet

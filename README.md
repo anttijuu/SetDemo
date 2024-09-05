@@ -142,7 +142,7 @@ Tässä perusteet. Tästä eteenpäin käsitellään sitä miten `Set` -tietorak
 
 Javan `Set` -rajapinnan [dokumentaatio](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html) kertoo mitä Javan `Set` -tietorakenteilla voidaan tehdä.
 
-Javan toteutus on kuitenkin aika suppea, eikä toteuta läheskään kaikkia yllä mainittuja tietojoukkojen operaatioita. Siksi tässä demossa käytetäänkin [Swiftin Set -tietorakennetta](https://developer.apple.com/documentation/swift/set), koska se sisältää kaikki alla luetellut tietojoukkojen olennaiset operaatiot.
+Javan toteutus on kuitenkin aika suppea, eikä toteuta läheskään kaikkia yllä mainittuja tietojoukkojen operaatioita. Siksi tässä demossa käytetäänkin [Swiftin Set -tietorakennetta](https://developer.apple.com/documentation/swift/set), koska se sisältää kaikki yllä luetellut tietojoukkojen olennaiset operaatiot.
 
 `Set`:t ovat usein erittäin nopeita tietorakenteita. Niitä **ei** siis ole toteutettu yllä kuvatulla tavalla taulukoilla, siten että uutta elementtiä lisätessä käydään aina **koko** taulukko läpi ja katsotaan onko elementti jo taulukossa. Tämä olisi erittäin hidas tapa, kun tietoaineistojen koko kasvaa suureksi.
 

@@ -173,6 +173,8 @@ Miten `Set` sitten esimerkiksi elementtiä lisätessä tietää onko joukossa jo
 Samaa periaatetta käytetään myös tutkiessa onko joku tietty elementti `Set`:ssä. Elementtien läpikäynti tietojoukossa toteutetaan taas usein *iteraattoreiden* avulla. Iteraattorit mahdollistavat tietojoukon elementtien läpikäynnin tyypillisen näköisessä `for` -silmukassa:
 
 ```Java
+   Set<Integer> theSet = new Set<>();
+   ...
    for (Integer value : theSet) {
       print("Value is: " + value);
    }

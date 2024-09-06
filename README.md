@@ -62,13 +62,13 @@ Esimerkkinä asiakasohjelma (client) joka tekee webbipalvelimelle (server) pyynn
    int returnCode = httpClient.executeRequest(request);
 ```
 
-Tässä `httpClient` on olio-ohjelmoinnin olio (`object`) joka lähettää palvelupyynnön kutsumalla metodia (funktiota) (`executeRequest`) palvelimelle HTTP-protokollaa käyttäen. Kun palvelin vastaa, metodi palauttaa kokonaisluvun joka kertoo miten pyynnön suorittamisen kanssa kävi. Kokonaisluku tulee palvelimelta asiakasohjelmalle joka tallentaa koodin `returnCode` -muuttujaan.
+Tässä `httpClient` on olio-ohjelmoinnin olio (*object*) joka lähettää palvelupyynnön kutsumalla metodia (funktiota; `executeRequest`) palvelimelle HTTP-protokollaa käyttäen. Kun palvelin vastaa, metodi palauttaa kokonaisluvun ("paluukoodi") joka kertoo miten pyynnön suorittamisen kanssa kävi. Kokonaisluku tulee palvelimelta asiakasohjelmalle joka tallentaa koodin `returnCode` -muuttujaan.
 
-HTTP [määrittelee](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) pyynnöille numeerisen kokonaislukukoodin, joka kertoo onnistuiko pyyntö vai ei, esimerkiksi:
+HTTP [määrittelee](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) pyyntöjen paluukoodille numeerisen kokonaislukuarvon, joka kertoo onnistuiko pyyntö vai ei, esimerkiksi:
 
 * Jos koodi on jotain arvoalueelta 200...299, pyyntö onnistui. 
-* Jos koodi on taas jotain 400 -alkuista, palvelin ilmaisee sillä että pyynnössä oli jotain vikaa. 
-* Koodi 5xx -arvoalueella taas tarkoittaa että palvelimen puolella joku meni pieleen.
+* Jos koodi on taas jotain 400 -alkuista, palvelin ilmaisee sillä että asiakasohjelman lähettämässä pyynnössä oli jotain vikaa. 
+* Koodi 5xx -arvoalueella taas tarkoittaa että palvelimen puolella jokin meni pieleen.
 
 Arvoalueet määrittelevät siis tavallaan kategorian tai luokan -- **joukkoja** kokonaislukuja. Joku tietty arvo joukon sisällä kertoo tarkemmin miten pyyntö saatiin suoritettua, tai jos ei saatu, mikä täsmälleen se virhe oli. 
 
@@ -99,7 +99,7 @@ Summa summarum: joukko-opin perusteiden tunteminen auttaa usein rakentamaan ehto
 
 Yksinkertaisimmillaan tietojoukkoa eli `Set` -tietorakennetta voi hyödyntää siihen, että pidetään sen avulla yllä kokoelmaa tietoelementtejä, varmistuen siitä että joukossa ei varmasti ole kahta kertaa samaa oliota (miten "samuus" eli yhtäsuuruus määritellään, siitä alempana). Joukkoon vain lisätään elementtejä, ja sitten niitä sieltä voidaan hakea ja käyttää, mihin sovellus niitä tarvitseekaan.
 
-Jos tähän käytettäisiin tavallisia taulukoita (*array*), meidän pitäisi itse toteuttaa taulukkoa käsittelevä koodi joka varmistaa ettei elementti ole jo taulukossa, ja lisätä se sinne vasta jos se elementti ei ole jo taulukossa. Set -tietorakenteet tekevät tämän "automaattisesti". Alempana katsotaan miten tämä toteutetaan, sillä jokun toteuttamaa koodiahan tämäkin vaatii.
+Jos tähän käytettäisiin tavallisia taulukoita (*array*), meidän pitäisi itse toteuttaa taulukkoa käsittelevä koodi joka varmistaa ettei elementti ole jo taulukossa, ja lisätä se sinne vasta jos se elementti ei ole jo taulukossa. Set -tietorakenteet tekevät tämän "automaattisesti". Alempana katsotaan miten tämä toteutetaan, sillä jokun toteuttamaa koodiahan tämäkin vaatii. Ohjelmoinnissa mitään ei koskaan tapahdu "itsestään", kaikki on ihmisten rakentamaa.
 
 `Set` -tietorakenteilla voidaan siis toteutuksesta riippuen tehdä sellaisiakin asioita joita joukko-opissa yleisesti käytetään. Näistä lisää seuraavaksi.
 
@@ -108,9 +108,9 @@ Jos tähän käytettäisiin tavallisia taulukoita (*array*), meidän pitäisi it
 
 Usein tarvittavia joukkojen perusoperaatioita on listattu alla. Näille operaatioille on tässä annettu joku tietty nimi, mutta eri ohjelmointikielten eri toteutuksissa metodien nimet tietysti vaihtelevat. 
 
-* **lisäys** `insert` tai `add` -lisätään elementti tietojoukkoon. Jos joukossa on jo täsmälleen sama elementti, lisäystä ei tehdä. Usein tämä operaatio palauttaa arvon, joka kertoo tehtiinkö lisäystä vai ei.
-* **sisältää** `contains` - testataan onko joku tietty elementti tietojoukossa.
-* **yhtäsuuruus** `equals` - testataan onko kahdessa tietojoukossa täsmälleen samat elementit.
+* **lisäys** `insert` tai `add` -- lisätään elementti tietojoukkoon. Jos joukossa on jo täsmälleen sama elementti, lisäystä ei tehdä. Usein tämä operaatio palauttaa arvon, joka kertoo tehtiinkö lisäystä vai ei.
+* **sisältää** `contains` -- testataan onko joku tietty elementti tietojoukossa.
+* **yhtäsuuruus** `equals` -- testataan onko kahdessa tietojoukossa täsmälleen samat elementit.
 * onko tietojoukko **tyhjä joukko** `isEmpty` -- testataan onko joukossa yhtään elementtiä.
 * elementtien **määrä** (*count*) `count, size` tietojoukossa -- kertoo kuinka monta elementtiä joukossa on.
 
@@ -146,22 +146,24 @@ Javan toteutus on kuitenkin aika suppea, eikä toteuta läheskään kaikkia yll�
 
 `Set`:t ovat usein erittäin nopeita tietorakenteita. Niitä **ei** siis ole toteutettu yllä kuvatulla tavalla taulukoilla, siten että uutta elementtiä lisätessä käydään aina **koko** taulukko läpi ja katsotaan onko elementti jo taulukossa. Tämä olisi erittäin hidas tapa, kun tietoaineistojen koko kasvaa suureksi.
 
-Taulukot ovat kuitenkin usein `Set`:ien toteutuksessa käytetty tietorakenne. Toteutukset hyödyntävätkin **hajautusavaimia** eli tiivisteitä (*hash*), eli ovat samankaltaisia toteutukseltaan, kuin **hajautustaulut** (*hash table*). Tässä oletetaan että tunnet jo hajautustaulun perusteet, esim. sen miten törmäykset (*collisions*) hoidetaan esimerkiksi luotaamalla (*probing*).
+Taulukot ovat kuitenkin usein `Set`:ien toteutuksessa käytetty tietorakenne. Toteutukset hyödyntävätkin **hajautusavaimia** eli tiivisteitä (*hash*), eli ovat samankaltaisia toteutukseltaan, kuin **hajautustaulut** (*hash table*). Tässä oletetaan että tunnet jo hajautustaulun perusteet, mitä tiiviste tarkoittaa, ja esim. sen miten törmäykset (*collisions*) hoidetaan esimerkiksi luotaamalla (*probing*).
 
 > Toinen mahdollisuus on toteuttaa `Set` hyödyntäen puutietorakenteita (*tree*), esim. Javan `TreeSet`.
 
-Javassa (taulukkopohjaisessa) toteutuksessa hyödynnetään sitä että kaikilla luokilla on metodi `hashCode()` jolla voidaan laskea elementille tiiviste (*hash*). Jokainen oman luokan toteuttava koodari huolehtii siitä, että luokalla on:
+Javassa (taulukkopohjaisessa) toteutuksessa hyödynnetään sitä että kaikilla luokilla on metodi `hashCode()` jolla voidaan laskea elementille tiiviste (*hash*; kokonaisluku). Jokainen oman luokan toteuttava koodari huolehtii siitä, että luokalla on:
 
-1. hyvä hajautusfunktion toteutus `hashCode()` -metodissa,
+1. hyvä tiivisteen laskeva hajautusfunktion toteutus `hashCode()` -metodissa,
 2. siten että noudatetaan Javan perussääntöä että luokan `equals()` ja `hashCode()` käyttävät luokan samoja ominaisuuksia (jäsenmuuttujia) yhtäsuuruuden arvioinnissa ja tiivisteen toteuttamisessa.   
 
-Monissa muissakin ohjelmointikielissä on sama periaate --  olion *identiteetti*, se miten olio voidaan erottaa toisista olioista, usein tiettyjen (yhden tai useamman) jäsenmuuttujien arvojen perusteella, vaikuttaa siihen miten nämä kaksi metodia toteutetaan. Molemmat metodit tulisi (yleensä) toteuttaa niin että metodit hyödyntävä samoja jäsenmuuttujia -- olion identiteetin määrääviä tietoja. 
+Monissa muissakin ohjelmointikielissä on sama periaate --  olion **identiteetti**, se miten olio voidaan erottaa toisista olioista, usein tiettyjen (yhden tai useamman) jäsenmuuttujien arvojen perusteella, vaikuttaa siihen miten nämä kaksi metodia toteutetaan. Molemmat metodit tulisi (yleensä) toteuttaa niin että metodit hyödyntävä samoja jäsenmuuttujia -- olion identiteetin määrääviä tietoja. 
 
-> Esimerkkinä vaikkapa valtionhallinnon tietojärjestelmä jossa kansalainen tunnistetaan yksikäsitteisesti *henkilötunnuksen* avulla. Se määrittää kansalaisen identiteetin yksikäsitteisesti. Tällöin `Citizen` -luokan `equals` vertailee kahden kansalaisolion henkilötunnus -jäsenmuuttujien yhtäsuuruutta, ja `hashCode()` laskee tiivisteen henkilötunnus -jäsenmuuttujasta. Molemmat käyttävät samaa jäsenmuuttujaa.
+> Esimerkkinä vaikkapa valtionhallinnon tietojärjestelmä jossa kansalainen tunnistetaan yksikäsitteisesti *henkilötunnuksen* avulla. Se määrittää kansalaisen identiteetin yksikäsitteisesti. Tällöin `Citizen` -luokan `equals` vertailee kahden kansalaisolion henkilötunnus -jäsenmuuttujien yhtäsuuruutta, ja `hashCode()` laskee tiivisteen henkilötunnus -jäsenmuuttujasta. Molemmat käyttävät *samaa* jäsenmuuttujaa.
+>
+> Kuten hajautustauluista muistat, tiivisteen idea on se, että samasta tiedosta laskettu tiiviste on arvoltaan aina sama luku, eli jos kansalaisolion henkilötunnus ei koskaan muutu, siitä laskettu tiiviste on myös arvoltaan aina sama.
 
-Swift -ohjelmointikielessä taas tietoelementin on toteutettava `Hashable` ja `Equatable`-rajapinnat. Näissä toteutetaan tiivisteen laskenta sekä yhtäsuuruuden määrittely. Demossa tästä lisää.
+Swift -ohjelmointikielessä tietoelementin, joita halutaan laittaa `Set` -kokoelmaan on toteutettava `Hashable` ja `Equatable`-rajapinnat. Näissä toteutetaan miten elementeistä lasketaan tiivisteet sekä miten elementtien yhtäsuuruus määritellään. Demossa tästä lisää.
 
-Miten `Set` sitten esimerkiksi elementtiä lisätessä tietää onko joukossa jo tämä kyseinen elementti?
+Miten `Set` sitten esimerkiksi elementtiä lisätessä tietää onko joukossa jo tämä kyseinen elementti? Aiemmin todettiin ettei ainakaan niin että käydään kaikki taulukossa olevat elementit ja tarkistetaan, yksi kerrallaan, koska se olisi liian hidasta:
 
 1. `Set` laskee ensin oliolle tiivisteen (*hash*).
 2. Tiivisteestä luodaan indeksi `Set`:n sisäiseen taulukkoon (kuten hajautustaulussakin).
@@ -170,7 +172,7 @@ Miten `Set` sitten esimerkiksi elementtiä lisätessä tietää onko joukossa jo
 5. Jos elementti oli sama, sitä ei lisätä uudestaan, usein palautetaan arvo joka kertoo kutsujalle ettei lisäystä tehty.
 6. Jos taas askeleen 4 elementti oli joku muu elementti joka vain sattui tulemaan samaan indeksiin kuin lisättäväkin olisi mennyt, hoidetaan tämä törmäys (*collision*) esimerkiksi luotaamalla (*probing*), siten että *eri* elementti, joka sattui saamaan toisen eri elementin indeksin, voidaan lisätä jonnekin toiseen indeksiin.
 
-Samaa periaatetta käytetään myös tutkiessa onko joku tietty elementti `Set`:ssä. Elementtien läpikäynti tietojoukossa toteutetaan taas usein *iteraattoreiden* avulla. Iteraattorit mahdollistavat tietojoukon elementtien läpikäynnin tyypillisen näköisessä `for` -silmukassa:
+Samaa periaatetta käytetään myös tutkiessa onko joku tietty elementti `Set`:ssä. Elementtien läpikäynti tietojoukossa toteutetaan taas usein *iteraattoreiden* avulla. Iteraattorit mahdollistavat tietojoukon elementtien läpikäynnin tyypillisen näköisessä `for` -silmukassa (Java -esimerkki):
 
 ```Java
    Set<Integer> theSet = new Set<>();
@@ -182,6 +184,8 @@ Samaa periaatetta käytetään myös tutkiessa onko joku tietty elementti `Set`:
 Iteraattoreista ei tässä kuitenkaan enempää.
 
 Kuten hajautustauluissakin, niin myös `Set`:n hyödyntämisessä on olennaista, että tietoelementtiin toteutettu hajautusfunktio on hyvä. Huono hajautusfunktio tuottaa eri elementeille samoja tiivisteitä, jolloin törmäyksiä syntyy paljon, ja `Set`:n toiminta hidastuu, jos aineiston koko kasvaa suureksi.
+
+> Kun tunnet hajautustaulujen toteutuksen periaatteet, huomaat että yllä oleva kuvaus `Set`:n toiminnasta on aika lailla sama kuin hajautustaulujenkin. Merkittävin ero onkin se, että kun hajautustaulu sisältää avain-arvopareja (*key-value*), `Set` taas sisältää yksittäisiä elementtejä.
 
 Tehokkuus saadaan siis aikaan yhteispelillä -- `Set`:n toteuttaja tekee hyvän ja tehokkaan tietorakenteen törmäystenkäsittelytekniikoineen, ja tietoelementtien koodarit toteuttavat omaan tietoelementtiinsa niin hyvän hajautusfunktion kun vaan pystyvät.
 
@@ -201,6 +205,7 @@ Demon lähdekoodi löytyy alihakemistosta `SetDemo`. Huomaa että osa koodista d
 * https://fi.wikipedia.org/wiki/Boolen_algebra#Boolen_algebran_läheinen_yhteys_joukko-oppiin
 * https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes/#Sets
 * https://developer.apple.com/documentation/swift/set
+* https://docs.oracle.com/javase/8/docs/api/java/util/Set.html
 
 # Kuka tämän teki?
 

@@ -76,9 +76,9 @@ HTTP [määrittelee](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) py
 * Jos koodi on taas jotain 400 -alkuista, palvelin ilmaisee sillä että asiakasohjelman lähettämässä pyynnössä oli jotain vikaa. 
 * Koodi 5xx -arvoalueella taas tarkoittaa että palvelimen puolella jokin meni pieleen.
 
-Arvoalueet määrittelevät siis tavallaan kategorian tai luokan -- **joukkoja** kokonaislukuja. Joku tietty arvo joukon sisällä kertoo tarkemmin miten pyyntö saatiin suoritettua, tai jos ei saatu, mikä täsmälleen se virhe oli. 
+Arvoalueet määrittelevät siis tavallaan kategorian tai luokan -- **joukkoja** kokonaislukuja. Nämä joukot ovat **osajoukkoja** kaikkien kokonaislukujen joukosta. Joku tietty arvo joukon sisällä kertoo tarkemmin miten pyyntö saatiin suoritettua, tai jos ei saatu, mikä täsmälleen se virhe oli. 
 
-> Esimerkiksi arvo `204` (No Content) sisältyy joukkoon 200...299 eli pyyntö onnistui, kaikki meni hyvin. Täsmällinen arvo taas kertoo, että palvelin ei lähettänyt mitään dataa asiakasohjelmalle käsiteltäväksi, joten tämä datan käsittely voidaan asiakasohjelman koodissa jättää tässä tilanteessa tekemättä.
+> Esimerkiksi arvo `204` (No Content) sisältyy osajoukkoon 200...299 eli pyyntö onnistui, kaikki meni hyvin. Täsmällinen arvo taas kertoo, että palvelin ei lähettänyt mitään dataa asiakasohjelmalle käsiteltäväksi, joten tämä datan käsittely voidaan asiakasohjelman koodissa jättää tässä tilanteessa tekemättä.
 
 Client voi sitten tarkistaa, onnistuiko pyynnön suorittaminen vai ei, ennenkuin se edes yrittää käsitellä palvelimen mahdollisesti koodin mukana lähettämää dataa:
 
@@ -91,10 +91,11 @@ Client voi sitten tarkistaa, onnistuiko pyynnön suorittaminen vai ei, ennenkuin
 	...
 }
 ```
+Tuossa ehtorakenteen (if...) ehto sanoo: "jos paluukoodi on suurempi tai yhtäsuuri kuin 200 JA paluukoodi on pienempi kuin 300, niin...".
 
-Eli tiedämme että paluukoodin mahdolliset arvot muodostavat **joukkoja** erilaisia arvoja. Clientin puolella voidaan sitten tarkistaa **mihin joukkoon** paluukoodin arvo sisältyy, ja käsitellä sitten sen mukaan vastaus palvelimelta:
+Eli tiedämme että paluukoodin mahdolliset arvot muodostavat **osajoukkoja** erilaisia arvoalueita. Clientin puolella voidaan sitten tarkistaa **mihin osajoukkoon** paluukoodin arvo sisältyy, ja käsitellä sitten sen mukaan vastaus palvelimelta:
 
-Yllä esimerkissä ei varsinaisesti hyödynnetty tietojoukko -tietorakenteita, mutta sama joukkojen *käsite* tässäkin on käytössä.
+Yllä esimerkissä ei varsinaisesti hyödynnetty tietojoukko -tietorakenteita, mutta sama joukkojen ja osajoukkojen *käsite* tässäkin on käytössä.
 
 Ehtolauseet, joissa on usein loogisia ehtoja, soveltuvat Boolen logiikan lait (käsitelty kurssilla Laitteet ja tietoverkot!). Boolen logiikan tai algebran ja joukko-opin perussäännöt muistuttavatkin huomattavasti toisiaan, jos niitä tarkemmin [lähdet tutkimaan](https://fi.wikipedia.org/wiki/Boolen_algebra#Boolen_algebran_läheinen_yhteys_joukko-oppiin).
 

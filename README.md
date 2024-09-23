@@ -17,10 +17,16 @@ Materiaali on aika lyhyt, ja sisältää vain ohjelmoinnin kannalta olennaiset p
 
 ## Tietojoukot ja joukko-oppi
 
-Tietojoukot (`Set`) ovat ohjemoinnissa äärellisiä tietoalkiokokoelmia (*container*) joissa:
+Tietojoukot (`Set`) ovat ohjelmoinnissa äärellisiä tietoalkiokokoelmia (*container*) joissa:
 
 - tietoelementit (alkiot) eivät ole joukossa missään tietyssä järjestyksessä ja
 - tietoelementti voi esiintyä tietojoukossa vain kerran
+
+Verrataan tietojoukkoa taulukoihin (*array*). Taulukot ovat myös erittäin yleisesti käytetty tietorakenne. Taulukoissa:
+
+- tietoelementit ovat yleensä taulukossa lisäysjärjestyksessä, 
+- taulukon elementit voidaan lajitella haluttuun järjestykseen, ja
+- taulukossa voi esiintyä saman arvoinen tietoelementti useammankin kerran.
 
 Matematiikassa (joukko-oppi on matematiikan osa-alue; tosin tästä on olemassa eriäviä mielipiteitä) tietojoukot voivat olla äärettömiä, esimerkiksi kaikkien positiivisten kokonaislukujen joukko. Tietokoneissa lukuarvoilla on kuitenkin äärelliset arvot, riippuen käytetyistä tietotyypeistä ja tietokoneen prosessorin arkkitehtuurista. Tietojoukot eivät voi olla äärettömiä siksikään että tietokoneiden muisti on rajallista.
 
@@ -62,7 +68,7 @@ Esimerkkinä asiakasohjelma (client) joka tekee webbipalvelimelle (server) pyynn
    int returnCode = httpClient.executeRequest(request);
 ```
 
-Tässä `httpClient` on olio-ohjelmoinnin olio (*object*) joka lähettää palvelupyynnön kutsumalla metodia (funktiota; `executeRequest`) palvelimelle HTTP-protokollaa käyttäen. Kun palvelin vastaa, metodi palauttaa kokonaisluvun ("paluukoodi") joka kertoo miten pyynnön suorittamisen kanssa kävi. Kokonaisluku tulee palvelimelta asiakasohjelmalle joka tallentaa koodin `returnCode` -muuttujaan.
+Tässä `httpClient` on olio-ohjelmoinnin olio (*object*) joka lähettää palvelupyynnön kutsumalla metodia (olioiden funktioita kutsutaan olio-ohjelmoinnissa metodeiksi, tässä `executeRequest`) palvelimelle HTTP-protokollaa käyttäen. Kun palvelin vastaa, metodi palauttaa kokonaisluvun ("paluukoodi") joka kertoo miten pyynnön suorittamisen kanssa kävi. Kokonaisluku tulee palvelimelta asiakasohjelmalle joka tallentaa koodin `returnCode` -muuttujaan.
 
 HTTP [määrittelee](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) pyyntöjen paluukoodille numeerisen kokonaislukuarvon, joka kertoo onnistuiko pyyntö vai ei, esimerkiksi:
 
@@ -99,7 +105,7 @@ Summa summarum: joukko-opin perusteiden tunteminen auttaa usein rakentamaan ehto
 
 Yksinkertaisimmillaan tietojoukkoa eli `Set` -tietorakennetta voi hyödyntää siihen, että pidetään sen avulla yllä kokoelmaa tietoelementtejä, varmistuen siitä että joukossa ei varmasti ole kahta kertaa samaa oliota (miten "samuus" eli yhtäsuuruus määritellään, siitä alempana). Joukkoon vain lisätään elementtejä, ja sitten niitä sieltä voidaan hakea ja käyttää, mihin sovellus niitä tarvitseekaan.
 
-Jos tähän käytettäisiin tavallisia taulukoita (*array*), meidän pitäisi itse toteuttaa taulukkoa käsittelevä koodi joka varmistaa ettei elementti ole jo taulukossa, ja lisätä se sinne vasta jos se elementti ei ole jo taulukossa. Set -tietorakenteet tekevät tämän "automaattisesti". Alempana katsotaan miten tämä toteutetaan, sillä jokun toteuttamaa koodiahan tämäkin vaatii. Ohjelmoinnissa mitään ei koskaan tapahdu "itsestään", kaikki on ihmisten rakentamaa.
+Jos tähän käytettäisiin taulukoita, meidän pitäisi itse toteuttaa taulukkoa käsittelevä koodi, joka varmistaa ettei elementti ole jo taulukossa, ja lisätä se sinne vasta jos se elementti ei ole jo taulukossa. Set -tietorakenteet tekevät tämän "automaattisesti". Alempana katsotaan miten tämä toteutetaan, sillä jonkun toteuttamaa koodiahan tämäkin aina vaatii. Ohjelmoinnissa mitään ei koskaan tapahdu "itsestään", *kaikki* on jollain tapaa ihmisten rakentamaa.
 
 `Set` -tietorakenteilla voidaan siis toteutuksesta riippuen tehdä sellaisiakin asioita joita joukko-opissa yleisesti käytetään. Näistä lisää seuraavaksi.
 
@@ -123,9 +129,9 @@ Operaatioita ovat siis seuraavat:
 * **leikkaus** (*intersection*) -- kahden joukon leikkaus sisältää *molemmissa* joukoissa olevat, yhteiset elementit. Esimerkiksi joukkojen {1, 2, 3} ja {2, 3, 4} leikkaus on joukko {2, 3}.
 * **symmetrinen erotus** (*symmetric difference*) -- kahden joukon ne elementit, jotka *eivät ole* molemmissa joukoissa (eli ovat vain jommassa kummassa joukossa). Esimerkiksi, joukkojen {1, 2, 3} ja {2, 3, 4} symmetrinen erotus on joukko {1, 4}.
 * **unioni** (*union*) -- kahden joukon elementit yhdistettynä. Jos molemmissa joukoissa oli samoja elementtejä, ne esiintyvät unionissa vain kerran. Esimerkiksi joukkojen {1, 2, 3} ja {2, 3, 4} unioni on joukko {1, 2, 3, 4}.
-* **joukkoerotus** (*set difference*, kuvassa *substracting*) -- Joukon A ne elementit, jotka eivät ole joukossa B. Esimerkiksi joukkojen {1, 2, 3} ja {2, 3, 4} joukkoerotus on joukko {1}.
+* **joukkoerotus** (*set difference*, kuvassa *subtracting*) -- Joukon A ne elementit, jotka eivät ole joukossa B. Esimerkiksi joukkojen {1, 2, 3} ja {2, 3, 4} joukkoerotus on joukko {1}.
 
-> Englanninkielinen sana *substract* tarkoittaa vähentämistä, eli erotusta.
+> Englanninkielinen sana *subtract* tarkoittaa vähentämistä, eli erotusta.
 
 Lisäksi `Set` toteuttaa usein metodeja joilla voidaan kysyä kahden joukon välisiä suhteita:
 

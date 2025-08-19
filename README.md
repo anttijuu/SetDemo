@@ -201,7 +201,7 @@ Tehokkuus saadaan siis aikaan yhteispelillä -- `Set`:n toteuttaja tekee hyvän 
 
 Opettajan esittämässä demossa (kurssilla Tietorakenteet ja algoritmit) käydään läpi näitä joukkojen operaatioita, siten kun ne on valmiiksi toteutettuna Swiftin `Set` -tietorakenteessa.
 
-Demon lähdekoodi löytyy alihakemistosta `SetDemo`. Huomaa että osa koodista demossa on kommentoituna, tarkoitus on että opettaja demossaan poistaa kommentit askel askeleelta ja kertoo mitä tapahtuu ja miksi.
+Demon lähdekoodi löytyy alihakemistosta `SetDemo`. Huomaa että demossa osa `Citizen` -tietorakenteen koodista ja sitä käyttävä main -funktion koodin on tarkoitus olla ensin kommentoituna, tarkoitus on että opettaja demossaan poistaa kommentit askel askeleelta ja kertoo mitä tapahtuu ja miksi.
 
 
 # Lähteet
